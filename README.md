@@ -6,6 +6,12 @@ TerraWise is **Infordata Sistemi**'s territorial-emergency platform: a digital t
 
 This repository is the **public umbrella** — what TerraWise is, how the modules fit together, where to find each one, and where the product is going. The implementation lives in the family of `kf50-*` repositories (see [MODULES.md](MODULES.md)).
 
+> **TerraWise project family.** Three repositories, three audiences:
+>
+> - **[`terrawise`](https://github.com/infordata-sistemi/terrawise)** — the product umbrella · architecture · modules · roadmap &nbsp;← *you are here*
+> - **[`karst-firewall-50`](https://github.com/infordata-sistemi/karst-firewall-50)** — the first deployment · EU Interreg public docs
+> - **[`pyrowise`](https://github.com/infordata-sistemi/pyrowise)** — the simulation engine · open scientific docs
+
 ---
 
 ## The four capabilities (today)
