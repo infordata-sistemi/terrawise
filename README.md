@@ -188,10 +188,11 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full data-flow and component diag
 This umbrella documentation is licensed under [CC BY 4.0](LICENSE). The underlying modules each follow their own licence — see each repo for details. Karst Firewall 5.0 follows an open-core model:
 
 - **Core community platform** — EUPL-1.2-or-later (open source).
+- **PyroWISE simulation engine** — AGPL-3.0 (open source); a commercial license + SaaS are available.
 - **Documentation, methodology & datasets** — CC BY 4.0.
 - **Advanced modules & SaaS** — proprietary, commercial.
 
-The PyroWISE simulation engine has an explicit open-vs-commercial boundary at [`infordata-sistemi/pyrowise/OPEN_VS_COMMERCIAL.md`](https://github.com/infordata-sistemi/pyrowise/blob/main/OPEN_VS_COMMERCIAL.md).
+The PyroWISE simulation engine is **open-core** — AGPL-3.0 source, with a commercial (non-copyleft) license and a hosted service; the explicit boundary is at [`infordata-sistemi/pyrowise/OPEN_VS_COMMERCIAL.md`](https://github.com/infordata-sistemi/pyrowise/blob/main/OPEN_VS_COMMERCIAL.md).
 
 ---
 
