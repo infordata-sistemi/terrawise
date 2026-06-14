@@ -27,7 +27,7 @@ This is the canonical index of the repositories that make up the TerraWise platf
 
 | Repo | Stack | Role |
 |---|---|---|
-| [PyroWISE firegrowth engine](https://github.com/markopetelin/infordata-kf50-firegrowth) | C++ / Python | The fire-spread simulator core, the GIS layer provider, and the Huygens-wavefront / Rothermel-surface model implementation. **Open scientific documentation:** [`infordata-sistemi/pyrowise`](https://github.com/infordata-sistemi/pyrowise). |
+| [PyroWISE firegrowth engine](https://github.com/markopetelin/infordata-kf50-firegrowth) | Python · FastAPI | The fire-spread simulator core, the GIS layer provider, and the Huygens-wavefront / Rothermel-surface model implementation — a pure-Python clean-room reimplementation of the CFFDRS / WISE science stack. **Open scientific documentation:** [`infordata-sistemi/pyrowise`](https://github.com/infordata-sistemi/pyrowise). |
 
 ## Routing & dispatch
 

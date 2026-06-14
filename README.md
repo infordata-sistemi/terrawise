@@ -53,8 +53,10 @@ Four shifts shape everything below:
 
 | Direction | Horizon | Why it's interesting |
 |---|---|---|
-| ★ **Dynamic NDVI → Dynamic Fuel State** | Now | Turn satellite "greenness" (NDVI) into a live fuel-moisture and fuel-state layer, so the simulator burns *today's* fuel. The NDVI pipeline already exists. |
+| ★ **Dynamic NDVI → Dynamic Fuel State** | Now · *first preview shipping* | Turn satellite "greenness" (NDVI) into a live fuel-moisture and fuel-state layer, so the simulator burns *today's* fuel. The NDVI pipeline already exists. |
 | Always-current fuels | Next | Burn scars, drought stress, harvests and regrowth update the fuel map automatically from each new satellite pass — and flag stressed, fire-prone vegetation weeks ahead. |
+
+> **Now live as an opt-in preview.** The first slice of this pillar has reached the platform: PyroWISE accepts a per-fuel-class NDVI-anomaly signal and converts it — bounded and provenance-tagged — into a per-class rate-of-spread modulation, exposed as an **opt-in toggle** on the simulator (off by default). It is deliberately conservative and gated behind an A/B hindcast against the static-fuel baseline before it could become a default — but the "living fuel" idea is no longer only a roadmap line. See the [PyroWISE model docs](https://github.com/infordata-sistemi/pyrowise/blob/main/MODEL.md#dynamic-fuel-state--reading-todays-fuel-from-space-opt-in).
 
 ### Pillar 3 — Intelligence that learns and sips energy
 
@@ -176,6 +178,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full data-flow and component diag
 
 - **Karst Firewall 5.0 (Interreg)** — running pilot. ~90% project progress; closes 14 August 2026.
 - **TerraWise as a product** — Karst is the reference deployment; the architecture is being prepared for a second site.
+- **Recent capability deltas** — the **dynamic fuel-state** pillar has reached the platform as an opt-in preview (NDVI anomaly → bounded per-class rate-of-spread modulation); the **agentic** layer gained a seventh assistant, an *active-fire trigger* that clusters FIRMS detections and proposes a nowcast per cluster for operator review; the simulator now renders **ensemble** burn-probability + p10/p50/p90 arrival envelopes. See the [CHANGELOG](CHANGELOG.md).
 - **This repo** — seeded; documentation roll-out is in progress. See [ROADMAP.md](ROADMAP.md) for the full living roadmap.
 
 ---

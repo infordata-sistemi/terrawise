@@ -8,7 +8,7 @@
 
 Today, TerraWise (deployed as **Karst Firewall 5.0**) is a cross-border wildfire twin. This is where we want to take it next: a **living, multi-hazard decision platform** that learns, sips energy, scales from the Karst to the whole Mediterranean, and gives insurers, infrastructure operators and planners modular tools to build on.
 
-> ⚠ **None of the directions below are live yet.** This is the direction we are taking the platform, openly and with our partners.
+> ⚠ **Most of the directions below are not live yet** — they are the direction we are taking the platform, openly and with our partners. The first exception has landed: the **Dynamic Fuel State** pillar now ships a first *opt-in preview* on the simulator (see Pillar 2 below).
 
 Four shifts shape everything:
 
@@ -60,10 +60,10 @@ Everything else — compound multi-risk, agentic & frugal AI, the modular decisi
 
 | Direction | Horizon | Impact |
 |---|---|---|
-| ★ **Dynamic NDVI → Dynamic Fuel State** | Now | High · the NDVI pipeline already exists |
+| ★ **Dynamic NDVI → Dynamic Fuel State** | Now · **first preview shipping** | High · the NDVI pipeline already exists |
 | Always-current fuels | Next | Medium · keeps every hazard model honest |
 
-**Dynamic NDVI → Dynamic Fuel State.** Turn the satellite "greenness" (NDVI) signal into a live fuel-moisture and fuel-state layer, so the fuel the simulator burns is *today's* fuel — green and damp, or cured and flammable — not last season's static map.
+**Dynamic NDVI → Dynamic Fuel State.** Turn the satellite "greenness" (NDVI) signal into a live fuel-moisture and fuel-state layer, so the fuel the simulator burns is *today's* fuel — green and damp, or cured and flammable — not last season's static map. *Status: a first opt-in preview is now wired into the simulator — PyroWISE assimilates a per-fuel-class NDVI anomaly into a bounded per-class rate-of-spread modulation (off by default, provenance-tagged), gated behind an A/B hindcast against the static-fuel baseline before it can become a default. [PyroWISE model docs →](https://github.com/infordata-sistemi/pyrowise/blob/main/MODEL.md#dynamic-fuel-state--reading-todays-fuel-from-space-opt-in)*
 
 **Always-current fuels.** Burn scars, drought stress, harvests and regrowth update the fuel map automatically from each new satellite pass — and flag stressed, fire-prone vegetation weeks ahead, turning the twin into an early-warning instrument for the land itself.
 
@@ -79,7 +79,7 @@ Everything else — compound multi-risk, agentic & frugal AI, the modular decisi
 | ★ **Frugal & green AI** | Next | High · cuts running cost & carbon |
 | Self-learning & self-improvement | Later | High · but needs careful governance |
 
-**Agentic assistance.** Software agents that watch the live data, draft the morning risk briefing, surface anomalies and propose interventions — always presented for a human to approve, never acting unsupervised. *(A first instance ships today on Karst Firewall 5.0 — see the [PyroTwin agentic layer](https://github.com/infordata-sistemi/karst-firewall-50#agentic-features--pyrotwin-operator-assistants).)*
+**Agentic assistance.** Software agents that watch the live data, draft the morning risk briefing, surface anomalies and propose interventions — always presented for a human to approve, never acting unsupervised. *(A first instance ships today on Karst Firewall 5.0 — see the [PyroTwin agentic layer](https://github.com/infordata-sistemi/karst-firewall-50#agentic-features--pyrotwin-operator-assistants). Seven scoped assistants now ship, the newest an **active-fire trigger** that clusters FIRMS detections and proposes a nowcast per cluster for operator review.)*
 
 **Frugal & green AI.** Smaller, distilled models and inference at the edge — closer to the sensors — for lower energy, lower cost and resilience when connectivity drops. Sustainability built into the AI itself, not just into the forest.
 
