@@ -8,7 +8,7 @@
 
 Today, TerraWise (deployed as **Karst Firewall 5.0**) is a cross-border wildfire twin. This is where we want to take it next: a **living, multi-hazard decision platform** that learns, sips energy, scales from the Karst to the whole Mediterranean, and gives insurers, infrastructure operators and planners modular tools to build on.
 
-> ⚠ **Most of the directions below are not live yet** — they are the direction we are taking the platform, openly and with our partners. The first exception has landed: the **Dynamic Fuel State** pillar now ships a first *opt-in preview* on the simulator (see Pillar 2 below).
+> ⚠ **Most of the directions below are not live yet** — they are the direction we are taking the platform, openly and with our partners. Two exceptions have now landed as *opt-in previews*: the **Dynamic Fuel State** pillar ships a first preview on the simulator (see Pillar 2), and a **TerraWise multi-hazard layer** brings live flood / heat / seismic context to the Karst cockpit (see Pillar 1) — both flag-gated and conservative by design.
 
 Four shifts shape everything:
 
@@ -26,7 +26,7 @@ Highest impact, least new plumbing.
 | # | Direction | Why first |
 |---|---|---|
 | 01 · Now | **Dynamic Fuel State (NDVI) layer** | Shovel-ready: the satellite NDVI / vegetation-health pipeline already feeds the platform. Turning it into a live "how dry is the fuel today" layer sharpens every fire forecast for the least new effort — the clearest win. |
-| 02 · Now | **Flood & extreme-heat layers** | The fastest way to become multi-hazard: the cross-border weather network and 3D terrain we already run are most of what flood and heat-wave mapping needs. Two hazards that touch every citizen — not only fire crews. |
+| 02 · Now · *preview shipping* | **Flood & extreme-heat layers** | The fastest way to become multi-hazard: the cross-border weather network and 3D terrain we already run are most of what flood and heat-wave mapping needs. Two hazards that touch every citizen — not only fire crews. *A first opt-in preview has landed via the TerraWise layer (Pillar 1).* |
 | 03 · Now | **Scale to all FVG & Slovenia** | Mostly data and compute, little new science. Covering the whole region multiplies the platform's reach and value before the harder leap to the wider Mediterranean. |
 
 Everything else — compound multi-risk, agentic & frugal AI, the modular decision-support platform, the Mediterranean twin — builds on these three foundations.
@@ -39,10 +39,13 @@ Everything else — compound multi-risk, agentic & frugal AI, the modular decisi
 
 | Direction | Horizon | Impact |
 |---|---|---|
-| ★ **Flooding & flash floods** | Now | High · reuses the weather network + 3D terrain |
-| ★ **Extreme heat & "heat bombs"** | Now | High · directly serves citizens & health services |
+| ★ **Flooding & flash floods** | Now · *preview shipping* | High · reuses the weather network + 3D terrain |
+| ★ **Extreme heat & "heat bombs"** | Now · *preview shipping* | High · directly serves citizens & health services |
+| ★ **Seismic events & exposure context** | Now · *preview shipping* | High · live quake events + exposure context for civil response (does not feed the fire physics) |
 | Slope instability & landslides | Next | Medium · compounds with fire & flood |
-| Seismic & compound risk | Next | High · the multi-hazard payoff — one compound-risk index, not four maps read in isolation |
+| Compound multi-risk index | Next | High · the multi-hazard payoff — one compound-risk index, not four maps read in isolation |
+
+> **Now live as an opt-in preview.** A new **TerraWise** layer ingests live and historical **earthquake** (USGS · INGV · EMSC), **flood / hydro** (ARSO · FVG Civil Protection · ISPRA IdroGEO · Copernicus EMS) and **heatwave** (MeteoAlarm · ERA5-HEAT) feeds, harmonises them into STAC + MinIO products (GeoJSON / GeoParquet / COG / Zarr), and serves them over a read-only `/terrawise/*` API that the Karst operator cockpit now surfaces as a multi-hazard dashboard. The boundary is deliberate: **PyroWISE stays the wildfire engine; TerraWise is the multi-hazard data/event layer — hazard context is *consumed, never injected*, and never alters the fire-spread physics.** Conservative by design: the API is **off by default** (flag-gated), the OGS earthquake source is still pending, population-exposure estimates are not yet wired, and the cockpit falls back to local data until an operator enables it.
 
 **Flooding & flash floods.** Pluvial and flash-flood exposure from rainfall, terrain hydrology and the karstic underground drainage — where water gathers fast on the limestone, and which roads, homes and assets sit in its path.
 
@@ -50,7 +53,7 @@ Everything else — compound multi-risk, agentic & frugal AI, the modular decisi
 
 **Slope instability & landslides.** Landslide susceptibility from slope, soil and rainfall — sharpened *after* fires, when burnt ground sheds water and the risk of debris flows climbs. A natural pairing with the post-fire recovery view.
 
-**Seismic & compound risk.** Overlay seismic hazard and cross-correlate the layers: where do fire, flood, heat and earthquake stack on the same zone? Compound exposure is what planning and insurance really need.
+**Seismic events & compound risk.** Live earthquake events (INGV · EMSC · USGS) and an aggregate exposure summary now ship as context for civil response — *consumed, never injected* into the fire physics. The deeper prize is still ahead: cross-correlate seismic with fire, flood and heat into one **compound-risk index** — where they stack on the same zone. Compound exposure is what planning and insurance really need.
 
 ---
 
@@ -127,7 +130,7 @@ The same initiatives, sequenced by impact and readiness. Our honest view of the 
 | Horizon 1 — Now (0–12 mo) | Horizon 2 — Next (1–2 yr) | Horizon 3 — Later (2–4 yr) |
 |---|---|---|
 | Dynamic Fuel State (NDVI) layer | Compound / multi-risk index | Seismic correlation in the compound index |
-| Flood & extreme-heat hazard layers | Agentic assistance + frugal AI | Self-improving autonomy (governed) |
+| Flood, heat & seismic-event layers *(preview shipping)* | Agentic assistance + frugal AI | Self-improving autonomy (governed) |
 | Scale to all FVG & Slovenia | Modular DST for insurers & infrastructure | Regenerative-engineering design suite |
 |  | Plug-in / API ecosystem | A Mediterranean-wide twin |
 

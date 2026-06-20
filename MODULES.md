@@ -6,7 +6,7 @@ This is the canonical index of the repositories that make up the TerraWise platf
 
 | Repo | Stack | Role |
 |---|---|---|
-| [`kf50-php`](https://github.com/infordata-sistemi/kf50-php) | PHP 8 · Yii2 · MySQL | The operational cockpit for civil-protection teams and the public portal. Houses the alerting engine, the live-risk map, the 3D twin, the simulator UI and the multi-language content (IT / SL / EN / DE). |
+| [`kf50-php`](https://github.com/infordata-sistemi/kf50-php) | PHP 8 · Yii2 · MySQL | The operational cockpit for civil-protection teams and the public portal. Houses the alerting engine, the live-risk map, the 3D twin, the simulator UI, the **TerraWise multi-hazard dashboard**, and the multi-language content (IT / SL / EN / DE). |
 
 ## Data plane
 
@@ -28,6 +28,12 @@ This is the canonical index of the repositories that make up the TerraWise platf
 | Repo | Stack | Role |
 |---|---|---|
 | [PyroWISE firegrowth engine](https://github.com/markopetelin/infordata-kf50-firegrowth) | Python · FastAPI · **AGPL-3.0** | The fire-spread simulator core, the GIS layer provider, and the Huygens-wavefront / Rothermel-surface model implementation — a pure-Python clean-room reimplementation of the CFFDRS / WISE science stack. Open source (AGPL-3.0) with a commercial license + SaaS. **Open scientific documentation:** [`infordata-sistemi/pyrowise`](https://github.com/infordata-sistemi/pyrowise). |
+
+## Multi-hazard data layer (TerraWise)
+
+| Repo | Stack | Role |
+|---|---|---|
+| [TerraWise layer](https://github.com/markopetelin/infordata-kf50-firegrowth) *(in the PyroWISE engine repo)* | Python · FastAPI · STAC / MinIO | The multi-hazard data/event layer (opt-in preview). Ingest adapters for earthquake (USGS · INGV · EMSC), flood / hydro (ARSO · FVG Civil Protection · ISPRA IdroGEO · Copernicus EMS) and heatwave (MeteoAlarm · ERA5-HEAT); cross-source de-duplication; an aggregate (no-PII) exposure summariser; a STAC + MinIO product publisher; and a read-only `/terrawise/*` HTTP API. A **data-only package inside the PyroWISE engine repo** — barred by an import-lint boundary from touching the fire-spread kernels. Its consumer is the `kf50-php` TerraWise dashboard. |
 
 ## Routing & dispatch
 
