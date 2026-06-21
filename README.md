@@ -2,7 +2,7 @@
 
 > **T**erritorial **E**mergency **R**isk & **R**esilience **A**nalytics — **W**arning, **I**ntelligence, **S**imulation & **E**valuation.
 
-TerraWise is **Infordata Sistemi**'s territorial-emergency platform: a digital twin that pairs live risk monitoring, AI-driven warning and physics-grounded fire-spread simulation to help authorities prevent, anticipate and respond to wildfires today — and to the wider family of territorial emergencies (flood, heat, slope instability, compound risk) tomorrow.
+TerraWise is **Infordata Sistemi**'s territorial-emergency platform: a digital twin that pairs live risk monitoring, AI-driven warning and physics-grounded fire-spread simulation to help authorities prevent, anticipate and respond to wildfires today — and, increasingly, to the wider family of territorial emergencies: flood, heat and seismic context now ship as an opt-in preview (see [Pillar 1](#pillar-1--multi-hazard)), with slope instability and compound-risk fusion to follow.
 
 This repository is the **public umbrella** — what TerraWise is, how the modules fit together, where to find each one, and where the product is going. The implementation lives in the family of `kf50-*` repositories (see [MODULES.md](MODULES.md)).
 
@@ -42,10 +42,13 @@ Four shifts shape everything below:
 
 | Direction | Horizon | Why it's interesting |
 |---|---|---|
-| ★ **Flooding & flash floods** | Now | Pluvial + flash-flood exposure from rainfall, terrain hydrology and karstic underground drainage. Reuses the existing weather network + 3D terrain. |
-| ★ **Extreme heat & "heat bombs"** | Now | Heat-wave + urban-heat exposure from station network + land cover. Public-health early warning *and* a fuel-drying signal for the fire model. |
+| ★ **Flooding & flash floods** | Now · *preview shipping* | Pluvial + flash-flood exposure from rainfall, terrain hydrology and karstic underground drainage. Reuses the existing weather network + 3D terrain. Live hydro/flood events and flood-hazard zones now ship via the TerraWise layer (preview). |
+| ★ **Extreme heat & "heat bombs"** | Now · *preview shipping* | Heat-wave + urban-heat exposure from station network + land cover. Public-health early warning *and* a fuel-drying signal for the fire model. Heat warnings (MeteoAlarm) and UTCI heat-stress now ship via the TerraWise layer (preview). |
+| ★ **Seismic events & exposure context** | Now · *preview shipping* | Live earthquake events (INGV · EMSC · USGS) with an aggregate exposure summary — civil-response context. Does **not** feed the fire physics. |
 | Slope instability & landslides | Next | Landslide susceptibility from slope, soil and rainfall — sharpened after fires when burnt ground sheds water. Natural pair with post-fire recovery. |
-| Seismic & compound risk | Next | Overlay seismic hazard and cross-correlate the layers into one **compound-risk index** — where fire, flood, heat and earthquake stack on the same zone. The multi-hazard payoff. |
+| Compound multi-risk index | Next | Cross-correlate the layers into one **compound-risk index** — where fire, flood, heat and earthquake stack on the same zone. The multi-hazard payoff. |
+
+> **Now live as an opt-in preview.** The first slice of multi-hazard has reached the platform: a new **TerraWise** layer ingests live and historical **earthquake** (USGS · INGV · EMSC), **flood / hydro** (ARSO · FVG Civil Protection · ISPRA IdroGEO · Copernicus EMS) and **heatwave** (MeteoAlarm · ERA5-HEAT) feeds, harmonises them into STAC + MinIO products (GeoJSON / GeoParquet / COG / Zarr), and exposes them through a read-only `/terrawise/*` API that the Karst operator cockpit now surfaces as a multi-hazard dashboard. The boundary is deliberate: **PyroWISE stays the wildfire engine; TerraWise is the multi-hazard data/event layer — hazard context is *consumed, never injected*, and never alters the fire-spread physics** (the lint build fails if it tries). It is conservative by design — the API is **off by default** (flag-gated), the OGS earthquake source is still pending, population-exposure estimates are not yet wired, and the cockpit falls back to local data until an operator enables it. But the multi-hazard pillar is no longer only a roadmap line. See the [PyroWISE ↔ TerraWise boundary](ARCHITECTURE.md#terrawise-multi-hazard-layer--data-not-code).
 
 ### Pillar 2 — Living data (Dynamic Fuel State)
 
@@ -94,7 +97,7 @@ Four shifts shape everything below:
 | Horizon 1 — Now (0–12 mo) | Horizon 2 — Next (1–2 yr) | Horizon 3 — Later (2–4 yr) |
 |---|---|---|
 | Dynamic Fuel State (NDVI) layer | Compound / multi-risk index | Seismic correlation in the compound index |
-| Flood & extreme-heat hazard layers | Agentic assistance + frugal AI | Self-improving autonomy (governed) |
+| Flood, heat & seismic-event layers *(preview shipping)* | Agentic assistance + frugal AI | Self-improving autonomy (governed) |
 | Scale to all FVG & Slovenia | Modular DST for insurers & infrastructure | Regenerative-engineering design suite |
 |  | Plug-in / API ecosystem | A Mediterranean-wide twin |
 
@@ -103,7 +106,7 @@ Four shifts shape everything below:
 Three things to build first — highest impact, least new plumbing:
 
 1. **The Dynamic Fuel State layer** *(now)* — shovel-ready, the NDVI pipeline already feeds the platform; sharpens every fire forecast for the least new effort.
-2. **Flood & extreme-heat layers** *(now)* — the fastest way to become multi-hazard; reuses the existing weather network + 3D terrain.
+2. **Flood & extreme-heat layers** *(now — preview shipping)* — the fastest way to become multi-hazard; reuses the existing weather network + 3D terrain. A first opt-in preview has landed via the TerraWise layer (see [Pillar 1](#pillar-1--multi-hazard)).
 3. **Scale to all FVG & Slovenia** *(now)* — mostly data and compute, little new science; multiplies the platform's reach before the harder leap to the Mediterranean.
 
 Everything else — compound multi-risk, agentic & frugal AI, the modular decision-support platform, the Mediterranean twin — builds on these three foundations.
@@ -133,7 +136,7 @@ The implementation is split across a family of repositories. See [MODULES.md](MO
 
 | Repo | Role |
 |---|---|
-| [`kf50-php`](https://github.com/infordata-sistemi/kf50-php) | Operator cockpit + public portal (Yii2 / PHP) |
+| [`kf50-php`](https://github.com/infordata-sistemi/kf50-php) | Operator cockpit + public portal (Yii2 / PHP) — incl. the TerraWise multi-hazard dashboard |
 | [`kf50-observation-ingest`](https://github.com/infordata-sistemi/kf50-observation-ingest) | Ingest pipeline: gateways → Influx (primary) + MySQL (fallback) |
 | [`kf50-sensors`](https://github.com/infordata-sistemi/kf50-sensors) | IoT sensor + LoRaMIP gateway firmware / configuration |
 | [`kf50-kfwi-api`](https://github.com/infordata-sistemi/kf50-kfwi-api) | Karst Fire Weather Index ML service |
@@ -141,6 +144,7 @@ The implementation is split across a family of repositories. See [MODULES.md](MO
 | [`kf50-dji-bridge`](https://github.com/infordata-sistemi/kf50-dji-bridge) | DJI drone + dock read-only ingest service |
 | [`kf50-osrm`](https://github.com/infordata-sistemi/kf50-osrm) | Self-hosted OSRM routing for intervention dispatch |
 | [PyroWISE engine](https://github.com/markopetelin/infordata-kf50-firegrowth) | Fire-spread simulator core + GIS layer provider |
+| [TerraWise multi-hazard layer](https://github.com/markopetelin/infordata-kf50-firegrowth) | Multi-hazard ingest adapters + STAC/MinIO products + read-only `/terrawise/*` API — a data-only package inside the PyroWISE engine repo (opt-in preview) |
 
 PyroWISE's open scientific documentation has its own home at [`infordata-sistemi/pyrowise`](https://github.com/infordata-sistemi/pyrowise).
 
@@ -178,7 +182,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the full data-flow and component diag
 
 - **Karst Firewall 5.0 (Interreg)** — running pilot. ~90% project progress; closes 14 August 2026.
 - **TerraWise as a product** — Karst is the reference deployment; the architecture is being prepared for a second site.
-- **Recent capability deltas** — the **dynamic fuel-state** pillar has reached the platform as an opt-in preview (NDVI anomaly → bounded per-class rate-of-spread modulation); the **agentic** layer gained a seventh assistant, an *active-fire trigger* that clusters FIRMS detections and proposes a nowcast per cluster for operator review; the simulator now renders **ensemble** burn-probability + p10/p50/p90 arrival envelopes. See the [CHANGELOG](CHANGELOG.md).
+- **Recent capability deltas** — a new **TerraWise multi-hazard layer** has landed as an opt-in, flag-gated preview (live earthquake / flood / heatwave ingest → STAC + MinIO products → a read-only `/terrawise/*` API, surfaced as a Karst operator dashboard; data-only, never altering the fire physics); the **dynamic fuel-state** pillar has reached the platform as an opt-in preview (NDVI anomaly → bounded per-class rate-of-spread modulation); the **agentic** layer gained a seventh assistant, an *active-fire trigger* that clusters FIRMS detections and proposes a nowcast per cluster for operator review; the simulator now renders **ensemble** burn-probability + p10/p50/p90 arrival envelopes. See the [CHANGELOG](CHANGELOG.md).
 - **This repo** — seeded; documentation roll-out is in progress. See [ROADMAP.md](ROADMAP.md) for the full living roadmap.
 
 ---
